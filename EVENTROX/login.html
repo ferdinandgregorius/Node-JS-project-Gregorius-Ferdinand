@@ -20,6 +20,7 @@
 
 <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script><![endif]-->
 <!--[if lt IE 9]><script src="js/respond.js"></script><![endif]-->
+    <script src="js/index.js"></script>
 
 </head>
 
@@ -106,6 +107,12 @@
                                     </ul>
                                 </li>
                                 <li><a href="contact.html">Contact</a></li>
+                                <li class="dropdown">Account
+                                    <ul>
+                                        <li><a href="register.html">Register</a></li>
+                                        <li><a href="login.html">Login</a></li>
+                                    </ul>
+                                </li>
                             </ul>
                         </div>
                     </nav>
@@ -166,19 +173,19 @@
                         <form method="post" action="index.html">
                             <div class="form-group">
                                 <span class="adon-icon"><span class="fa fa-user"></span></span>
-                                <input type="text" name="username" value="" placeholder="Your Name *">
+                                <input type="text" id="name" name="username" value="" placeholder="Your Name *">
                             </div>
                             <div class="form-group">
                                 <span class="adon-icon"><span class="fa fa-envelope"></span></span>
-                                <input type="email" name="useremil" value="" placeholder="Emai Address*">
+                                <input type="email" id="email" name="useremil" value="" placeholder="Emai Address*">
                             </div>
                             <div class="form-group">
                                 <span class="adon-icon"><span class="fa fa-unlock"></span></span>
-                                <input type="password" name="userpassword" value="" placeholder="Enter Password">
+                                <input type="password" id="password" name="userpassword" value="" placeholder="Enter Password">
                             </div>
                             <div class="clearfix">
                                 <div class="form-group pull-left">
-                                    <button type="button" class="theme-btn btn-style-two"><span class="btn-title">Login Now</span></button>
+                                    <button onclick="login()" type="button" class="theme-btn btn-style-two"><span class="btn-title">Login Now</span></button>
                                 </div>
                                 <div class="form-group social-icon-one pull-right">
                                     Or login with &ensp; 
@@ -399,5 +406,32 @@
 <script src="js/script.js"></script>
 <!-- Color Setting -->
 <script src="js/color-settings.js"></script>
+<script>
+    function login(){
+        email = document.getElementById("email").value;
+        password = document.getElementById("password").value;
+        var url = "http://localhost:3000/api/users/"+email+"/"+password;
+
+        var data = {};
+        data.email = email;
+        data.password = password;
+        var json = JSON.stringify(data);
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', url, true);
+        xhr.onload = function () {
+            console.log(xhr.responseText);
+
+            var res = JSON.parse(xhr.responseText);
+            if (xhr.readyState == 4 && xhr.status == "200") {
+                document.getElementById('result').innerHTML = res.message;
+            } else {
+                console.error(res);
+                document.getElementById('result').innerHTML = res.message;
+            }
+        }
+        xhr.send(null);
+    }
+</script>
 </body>
 </html>
