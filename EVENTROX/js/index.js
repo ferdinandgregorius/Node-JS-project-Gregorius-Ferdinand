@@ -47,7 +47,6 @@ app.get('/api/users/:email/:password', (req, res) => {
     const {error} = validateUser(req.params);
     if (error) {
         console.log('Validation error');
-
         var jsonRespond = {
             result: "",
             message: error.details[0].message

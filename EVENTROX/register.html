@@ -98,7 +98,7 @@
                                         <li><a href="buy-ticket.html">Buy Ticket</a></li>
                                     </ul>
                                 </li>
-                                <li class="current dropdown"><a href="blog-sidebar.html">Blog</a>
+                                <li class="dropdown"><a href="blog-sidebar.html">Blog</a>
                                     <ul>
                                         <li><a href="blog-sidebar.html">Blog With Sidebar</a></li>
                                         <li><a href="blog-grid.html">Blog Grid</a></li>
@@ -107,7 +107,7 @@
                                     </ul>
                                 </li>
                                 <li><a href="contact.html">Contact</a></li>
-                                <li class="dropdown">Account
+                                <li class="current dropdown">Account
                                     <ul>
                                         <li><a href="register.html">Register</a></li>
                                         <li><a href="login.html">Login</a></li>
@@ -421,10 +421,11 @@
 
             var res = JSON.parse(xhr.responseText);
             if (xhr.readyState == 4 && xhr.status == "200") {
-                document.getElementById('result').innerHTML = res.message;
+                alert('Registration success');
+                window.location.assign("login.html");
             } else {
                 console.error(res);
-                document.getElementById('result').innerHTML = res.message;
+                alert(res.message);
             }
         }
         xhr.send(json);
